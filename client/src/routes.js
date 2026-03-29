@@ -1,4 +1,4 @@
-import {useRoutes} from 'react-router-dom';
+import {useRoutes, Navigate} from 'react-router-dom';
 
 //Layouts 
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
@@ -8,7 +8,9 @@ import configData from "./config.json"
 
 //Pages 
 import Login from './components/login';
-import Register from './components/register'
+import LoginPage from './components/login/LoginPage';
+import Register from './components/register';
+import RegisterPage from './components/register/RegisterPage';
 import Page404 from './components/Page404';
 import DashboardLayout from './layouts/dashboard';
 import Profile from './components/profile';
@@ -26,6 +28,10 @@ import About from './components/about';
 
 export default function Router() {
   return useRoutes([
+    {
+      path: '/',
+      element: <Navigate to={configData.LOGIN_URL} replace />
+    },
     {
       path: configData.DASHBOARD_HOME_URL,
       element: <DashboardLayout />,
@@ -54,13 +60,19 @@ export default function Router() {
     },
     {
         path: configData.LOGIN_URL,
-        element: <LogoOnlyLayout />,
-        children: [
-            {path: '', element: <Login/>},
-            {path: configData.REGISTER_URL, element: <Register/> },
-            {path: configData.USER_DELETED_URL, element: <PageUserDeleted/>},
-            {path:configData.ABOUT_URL,element: <About/>}
-        ]
+        element: <LoginPage />
+    },
+    {
+        path: configData.REGISTER_URL,
+        element: <RegisterPage />
+    },
+    {
+        path: configData.USER_DELETED_URL,
+        element: <PageUserDeleted/>
+    },
+    {
+        path: configData.ABOUT_URL,
+        element: <About/>
     },
     {path: '*', element: <Page404/>}
   ])

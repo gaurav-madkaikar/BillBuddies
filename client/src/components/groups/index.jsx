@@ -53,7 +53,7 @@ export default function Group() {
             }} />
           </Fab>
           <Typography variant="h3" pb={2}>
-            Your Groups,
+            Your Groups
           </Typography>
           <Grid container spacing={4} >
 
